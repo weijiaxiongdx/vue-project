@@ -214,23 +214,26 @@
 
     //watch
     //监视数据的变化，只能监视以下四种数据
-    //ref定义的数据，包括基本类型和对象类型。监视对象类型时，其实监视的是对象的地址，若想同时监视对象内部属性的变化，需要手动开启深度监视
+    //ref定义的数据，包括基本类型和对象类型。监视对象类型时，其实监视的是对象的地址(非对象中的属性)，若想同时监视对象内部属性的变化，需要手动开启深度监视
     //reactive定义的数据，默认是开启深度监视的且不能关闭
     //函数返回一个值，如：()=>{return person.name}或简写形式()=>person.name，通过这种方式达到监视对象中某个属性的目的
-    //包含前面内容的数组，就是监视多个数据
-    watch(person,(newValue,oldValue)=>{
+    //包含前面内容的数组，就是监视多个数据 watch([XX,YY],()=>{},{})
+    const stopWatch = watch(person,(newValue,oldValue)=>{
         console.log('person数据变化了')
-    },{deep:true})//三个参数：被监视的数据、监视的回调(数据有变化时的回调)、配置对象(开启深度监视等)
+        // 这里可以根据业务情况，达到一定条件时就停止监视
+        // stopWatch()
+    },{deep:true,immediate:true})//三个参数：被监视的数据、监视的回调(数据有变化时的回调)、配置对象(开启深度监视、立即监视等，immediate设置为true表示不管数据有没有变化，一上来就先执行一次)
 
     //watchEffect
-    //不用指定监视对象，直接写回调函数就可以了，会自动分析回调函数中使用到的数据的变化情况
+    //不用指定监视对象，直接写回调函数并在函数中直接使用相关的数据就可以了，会自动分析回调函数中使用到的数据的变化情况。一上来也会先执行一次
+    //也就是会自动监视回调函数中使用到的属性
     // watchEffect(()=>{
 
     // })
 
 
     //导入TS中的接口，必须加type
-    import {type PersonInte,type Persons} from '@/types' //不写文件名，默认找的就是types目录下的inex.ts文件
+    import {type PersonInte,type Persons} from '@/types' //不写文件名，默认找的就是types目录下的inex.ts文件。@表示src目录
     let tsPerson:PersonInte = {id:'1',name:'张三三',age:30} //表示tsPerson变量必须符合PersonInte接口定义的规范，属性名称、类型、数量等全都要符合接口中的定义
     // let tsPersonList:Array<PersonInte> = [ //表示数组变量tsPersonList中的每一项都要符合PersonInte接口定义的规范
     //     {id:'1',name:'张三三',age:30},
@@ -244,9 +247,9 @@
     ]
 
     //props
-    //接收父组件中传递的数据，以便在本组件中使用
-    // defineProps(['a']) //接收父组件中传递的数据a，本组件中就可以通过插值表达来使用a了。必传，否则父组件相关代码会报错提示
-    // let x = defineProps(['a','list']) //接收且将props保存起来，这样就可以通过x.a拿到对应的值。必传，否则父组件相关代码会报错提示
+    //接收父组件中传递的数据，以便在本组件中使用。父组件中使用子组件Person并传参 <Pserson a="123">
+    // defineProps(['a']) //子组件接收父组件中传递的数据a，子组件中就可以在模板中通过插值表达来使用a了。必传，否则父组件相关代码会报错提示。即使只有一个参数也得使用数组来接收
+    // let x = defineProps(['a','list']) //接收且将props保存起来，这样就可以在js中通过x.a拿到对应的值。必传，否则父组件相关代码会报错提示
     // defineProps<{list:PersonInte}>() //接收+限制，接收父组件传递的list，同时限制该list必须符合PersonInte接口定义的规范，就是不让乱传。必传，否则父组件相关代码会报错提示
     // defineProps<{list?:PersonInte}>() //问号表示父组件可传、可不传
     // withDefaults(defineProps<{list?:PersonInte}>(),{ //父若不传，子会使用自己提供的默认值
@@ -254,7 +257,7 @@
     // })
 
 
-    //自定义Hooks
+    //自定义Hooks。正是有了Hooks，组合式API才发挥出了威力
     //将同一功能或业务的代码封装到一起(js或ts文件)、src目录下创建各功能或业务对应的ts文件并写上跟当前功能或业务相关的数据、方法等、需要用到的地方导入Hooks并调用即可拿到对应的数据和方法了
     // import usePerson from '@/hooks/usePerson'; //对应usePerson.ts文件
     // const {personList,getPerson} = usePerson() //解构赋值拿到对应的数据和方法
