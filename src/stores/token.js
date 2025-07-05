@@ -8,6 +8,7 @@ import { ref } from 'vue';
  *  第二个参数：函数，函数内部可以定义状态的所有内容
  * 
  *  组合式写法
+ *  官方推荐使用和Hooks一样的命令方式，useXXX
  */
 export const useTokenStore = defineStore('token',()=>{
 
