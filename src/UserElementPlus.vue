@@ -286,9 +286,11 @@
     }
 
     //插槽
-    //默认插槽：不写名字的话插槽的默认名字就是default
-    //具名插槽：具有名字的插槽，自己命名
-    //作用域插槽：数据在子组件中，但根据数据生成的结构由父组件决定。即父组件中需要得到子组件中的数据来生成相应内容并添加到子组件中的插槽
+    //默认插槽：不写名字的话插槽的默认名字就是default。子组件中写好<slot></slot>相当于占好位置，父组件中使用子组件的时候可以带html内容，这些html内容就会出现在子组件中slot所在位置
+    //具名插槽：具有名字的插槽，自己命名。子组件中写好<slot name="slotName"></slot>相当于占好位置，父组件中使用子组件的时候，<template v-slot="slotName">这里写hmtl内容</template>，也可以写成<template #slotName>这里写hmtl内容</template>
+    //作用域插槽：数据在子组件中，但根据数据生成的结构由父组件决定。即父组件中需要得到子组件中的数据来生成相应内容并添加到子组件中的插槽 
+    //          子组件中写好<slot :paramKey="paramValue"></slot>，父组件中写<template v-slot="params">这里写hmtl内容，且可以通过params.paramKey获取参数</template>
+    //          如果是带名子的插槽，<slot name="slotName" :paramKey="paramValue"></slot>，父组件中写<template v-slot:slotName="params">这里写hmtl内容，且可以通过params.paramKey获取参数</template>
 
     //toRaw、markRaw
     //Teleport
