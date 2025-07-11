@@ -21,10 +21,19 @@ export default defineConfig({
   server:{
     proxy:{
       '/api':{//匹配路径中包含了/api的请求
-        target:'http://localhost:5000',//后端服务所在源
+        target:'http://localhost:5000',//后端服务所在源。将源修改为target配置的值
         changeOrigin:true,//true表示可以修改源
         rewrite:(path)=>path.replace(/^\/api/,'')//将路径中的api替换为''
       }
     }
-  }
+  },
+
+    css: { // 解决VS Code控制台中告警而加的 告警信息：“The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.”
+    preprocessorOptions: {
+      // 如果'modern-compiler'不管用，可换成"modern"
+      scss: {
+        api: 'modern-compiler' // or "modern"
+      }
+    }
+  }  
 })

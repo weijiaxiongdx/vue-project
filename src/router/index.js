@@ -4,15 +4,18 @@ import {createRouter,createWebHistory} from 'vue-router'
 //导入组件
 import UserVue from '@/User.vue'
 import UserElementPlus from '@/UserElementPlus.vue'
+import LoginVue from '@/views/Login.vue'
 
 //定义路由关系，即定义访问路径和组件的对应关系，不同的访问路径展示不同的组件内容
 //通过children配置子路由
 const routes = [
     { path: '/userVue',component:UserVue,name:'routeName' },//取个名字，更容易区分
     { path: '/userElementPlus',component:UserElementPlus },
+    { path: '/loginVue',component:LoginVue },
     { 
         path: '/', //请求地址中不写path(只有IP和端口)，默认为/，则匹配到这个路由
-        component:UserElementPlus,
+        // component:UserElementPlus,
+        component:LoginVue,
         children:[
             // {path:'',component: XXXXXX},//子级路由中，path的值前不用写/。跳子级路由时，需要写到子路由的完整路径(从上层到下层，一层层的写)
             {

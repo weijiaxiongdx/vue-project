@@ -1,5 +1,6 @@
 // 定义请求的实例
 
+import { ElMessage } from 'element-plus';
 import axios from 'axios';
 import router from '@/router';
 //const baseURL = 'http://localhost:5000'; //后端服务地址
@@ -14,19 +15,28 @@ const instance = axios.create({baseURL});
 instance.interceptors.response.use(
     //注册成功回调
     result=>{
-        if(result.status == 200){
+        // if(result.status == 200){ // 对HTTP响应状态码的判断
+        //     return result.data;
+        // }
+       
+
+         if(result.data.code === "200"){ // 对业务状态码的判断
             return result.data;
         }
-       
+
         //请求失败
-        alert(result.statusText?result.statusText:'服务器异常2')
+        // alert(result.statusText?result.statusText:'服务器异常2') // HTTP响应文本
+        // alert(result.data.msg?result.data.msg:'服务器异常2') // 接口响应数据
+        ElMessage.error(result.data.msg?result.data.msg:'服务器异常2');
+
         //将异步操作的状态改为失败
         return Promise.reject(result.data)
     },
 
     //注册失败回调
     err=>{
-        alert('服务器异常3');
+        // alert('服务器异常3');
+         ElMessage.error("服务器异常3");
         return Promise.reject(err);//异步的状态转化成失败的状态
     }
 )

@@ -51,3 +51,13 @@ export function updateUserService(userParam){
 export function deleteUserService(id){
     return request.delete("/deleteUser?id="+id)
 }
+
+// 用户注册函数
+export function userRegisterService (registerData){
+    return request.post('/user/register',registerData)
+}
+
+// 用户登录函数
+export function userLoginService (loginData){
+    return request.post('/user/login',loginData)
+}
