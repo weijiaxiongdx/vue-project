@@ -58,6 +58,7 @@
     // }
 
     ElMessage.success("注册成功");
+    // router.push("/login"); // 跳转到登录页
   }
 
 
@@ -70,7 +71,8 @@
     //     alert('登录失败');
     // }
 
-     ElMessage.success("登录成功");
+    ElMessage.success("登录成功");
+    router.push("/"); // 跳转到首页
   }
 
   // 清空registerData数据模型数据

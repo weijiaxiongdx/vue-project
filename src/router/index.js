@@ -5,21 +5,29 @@ import {createRouter,createWebHistory} from 'vue-router'
 import UserVue from '@/User.vue'
 import UserElementPlus from '@/UserElementPlus.vue'
 import LoginVue from '@/views/Login.vue'
+import LayoutVue from '@/views/Layout.vue'
+
+import UserAvatarVue from '@/views/user/UserAvatar.vue'
+import UserCategoryVue from '@/views/user/UserCategory.vue'
+import UserInfoVue from '@/views/user/UserInfo.vue'
+import UserManageVue from '@/views/user/UserManage.vue'
+import UserResetPasswordVue from '@/views/user/UserResetPassword.vue'
 
 //定义路由关系，即定义访问路径和组件的对应关系，不同的访问路径展示不同的组件内容
 //通过children配置子路由
 const routes = [
     { path: '/userVue',component:UserVue,name:'routeName' },//取个名字，更容易区分
     { path: '/userElementPlus',component:UserElementPlus },
-    { path: '/loginVue',component:LoginVue },
+    { path: '/login',component:LoginVue },
     { 
         path: '/', //请求地址中不写path(只有IP和端口)，默认为/，则匹配到这个路由
-        // component:UserElementPlus,
-        component:LoginVue,
+        component:LayoutVue,
+        redirect: '/user/manage', // 直接重定向到某个页面，相当于默认展示某个菜单对应的页面
         children:[
             // {path:'',component: XXXXXX},//子级路由中，path的值前不用写/。跳子级路由时，需要写到子路由的完整路径(从上层到下层，一层层的写)
             {
-                path:'a/:param1/:param2/:param3?',
+                path: '/user/category', component: UserCategoryVue
+            // path:'a/:param1/:param2/:param3?',
             // component: YYYYYY, //传递参数：params方式，此处占了三个位置，实际路由的地方通过a/value1/value2/value3形式来传递三个参数。加问号表示可传可不传
             // props:true //加了这个配置之后，使用的地方可以直接通过defineProps(['param1','param2','param3'])接收所有的params参数
             // props(route){ //函数写法，自己决定将什么作为propos传递给路由组件
@@ -29,7 +37,11 @@ const routes = [
                 //     a:100,
                 //     b:299
                 // }
-            }    
+            },
+            {path: '/user/manage', component: UserManageVue}, 
+            {path: '/user/info', component: UserInfoVue}, 
+            {path: '/user/avatar', component: UserAvatarVue}, 
+            {path: '/user/resetPassword', component: UserResetPasswordVue}, 
         ]
     } 
 ]
