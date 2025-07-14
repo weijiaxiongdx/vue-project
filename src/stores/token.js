@@ -25,10 +25,12 @@ export const useTokenStore = defineStore('token',()=>{
         token.value = ''
     }
 
-    return {
-        token,setToken,removeToken
-    },
     {
         persist:true//持久化存储。不配置这个则默认是内存存储
     }
+
+    return {
+        token,setToken,removeToken
+    }
+    
 });

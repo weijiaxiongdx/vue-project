@@ -63,6 +63,9 @@
 
 
   // 用户登录
+  import {useTokenStore} from '@/stores/token.js'
+  const tokenStore = useTokenStore();
+
   const login = async ()=>{
     let result = await userLoginService(registerData.value);
     // if(result.code === "200"){ // 对结果的判断统一放到响应拦截器中处理
@@ -72,6 +75,7 @@
     // }
 
     ElMessage.success("登录成功");
+    tokenStore.setToken(result.data) // 把token存储到pinia中
     router.push("/"); // 跳转到首页
   }
 
