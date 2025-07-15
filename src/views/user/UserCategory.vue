@@ -12,8 +12,8 @@ const categoryList = ref([
 
 import {categoryService} from '@/api/userCategory.js'
 const userCategoryList = async()=>{
-    let result = await categoryService(); // 为什么最终请求后台接口的地址是 http://localhost:5173/user/api/user/category api前面的user哪来的，待解决
-    categoryList.value = result;
+    let result = await categoryService(); // 为什么用户分类页面中最终请求后台接口的地址是 http://localhost:5173/user/api/user/category api前面的user哪来的，待解决
+    categoryList.value = result.data;
 }
 
 userCategoryList();
