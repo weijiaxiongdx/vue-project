@@ -26,7 +26,7 @@ export const useTokenStore = defineStore('token',()=>{
     }
 
     {
-        persist:true//持久化存储。不配置这个则默认是内存存储
+        persist:true//持久化存储。不配置这个则默认是内存存储。不做持久化则刷新浏览器数据就会丢失
     }
 
     return {

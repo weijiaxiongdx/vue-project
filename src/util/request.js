@@ -35,8 +35,13 @@ instance.interceptors.response.use(
 
     //注册失败回调
     err=>{
-        // alert('服务器异常3');
-         ElMessage.error("服务器异常3");
+        if(err.response.status===401){
+            ElMessage.error("请先登录");
+            router.push('/login');
+        } else {
+            ElMessage.error("服务器异常3");
+        }
+       
         return Promise.reject(err);//异步的状态转化成失败的状态
     }
 )
