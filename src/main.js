@@ -1,3 +1,4 @@
+// import就是模块化相关的关键字，另外还有export
 import './assets/main.css'
 
 import { createApp } from 'vue'
@@ -26,7 +27,7 @@ pinia.use(persist)
 import emitter from '@/utils/emmitter'
 
 //创建应用实例，应用实例的根组件为App
-const app = createApp(App)
+const app = createApp(App)  // 使得App就是根组件
 
 //使用element-plus、locale
 app.use(ElementPlus,{locale})
@@ -36,4 +37,4 @@ app.use(router)
 app.use(pinia)
 
 //控制html元素
-app.mount('#app') //挂载整个应用到app容器中
+app.mount('#app') //挂载整个应用(根组件)到app容器中
