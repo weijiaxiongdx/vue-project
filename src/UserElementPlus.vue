@@ -332,12 +332,16 @@
             <hr>
         </div>
 
-        <!-- 属性前加冒号表示要把引号中的内容当成JS表达式解析，冒号的完整写法是v-bind: -->
+        <!-- 属性前加冒号表示要把引号中的内容当成JS表达式解析，冒号的完整写法是v-bind: 
+             v-bind属于单向数据绑定：数据->页面 
+        -->
         <el-form :inline="true" :model="userSearchConditions" class="demo-form-inline">
             <el-form-item label="用户名">
-                <!-- v-model是简写形式，非简写为v-model:value -->
+                <!-- v-model是简写形式，非简写为v-model:value 
+                     只能用在表单类元素上，即输入类元素：input、select等
+                -->
                 <el-input v-model="userSearchConditions.name" placeholder="用户名" clearable />
-                <!-- v-model的底层就是“:value”和“@input”，前者用于将数据模型中的数据绑定到页面、后者用于将页面中的数据绑定到数据模型 -->
+                <!-- v-model的底层就是“:value”和“@input”，前者用于将数据模型中的数据绑定到页面、后者用于将页面中的数据绑定到数据模型，即双向绑定：数据->页面 且 页面->数据 -->
                 <!-- <input :value="userSearchConditions.name" @input="userSearchConditions.name = $event.target.value" placeholder="用户名" clearable /> -->
             </el-form-item>
             <el-form-item label="年龄">
