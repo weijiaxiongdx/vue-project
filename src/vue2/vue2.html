@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Vue2学习</title>
+    <script type="text/javascript" src="./vue.js"></script>
+
+  </head>
+  <body>
+   <div id="root">
+      <hello></hello> <!-- 使用全局组件 -->
+      <school></school> <!-- 第三步：使用组件 -->
+      <hr>
+      <student></student> <!-- 第三步：使用组件 -->
+      <student></student> <!-- 第三步：使用组件。复用组件 -->
+   </div>
+
+   <div id="root2"> <!-- 这里肯定不能使用局部组件school和student，因为它们只服务于root容器 -->
+      <hello></hello> <!-- 使用全局组件 -->
+   </div>
+
+
+   <script type="text/javascript">
+     Vue.config.productionTip = false // 关闭Vue的生产提示，浏览器控制台不打印相关日志
+
+     const childrenP = Vue.extend({ // 子组件测试
+       template:`
+          <div>
+             <h2>子组件</h2>
+          </div>
+        `,
+        data(){
+         return {
+             studentName:'王五',
+         }
+        },
+     })
+
+     // 第一步：创建school组件
+     const school = Vue.extend({
+      //   el: '#root', // 定义组件时，不能写el配置项目，因为最终所有的组件都要被一个vm管理，由vm决定服务于哪个容器
+        name:'school123',// 可以单独使用name指定组件在开发者工具中显示的名称，不影响该组件创建及注册时写的名称
+        template:`
+          <div>
+             <h2>学校名称：{{schoolName}}</h2>
+             <h2>学校地址：{{schoolAddress}}</h2>
+             <button @click=showSchoolName>点击提示学校名称</button>
+             <children></children>
+          </div>
+        `,
+        data(){ // data必须写成函数式，避免组件复用时，数据存在引用关系。如果写成对象式，多个地方使用同一个组件时，改了一个地方的数据，会影响到另一个地方
+         return {
+           schoolName:'清华',
+           schoolAddress:'北京 三里屯'
+         }
+        },
+
+        methods:{
+         showSchoolName(){
+            alert(this.schoolName) // 组件配置中的this指的是VueComponent实例对象
+         }
+        },
+
+        components:{ // 注册组件(局部)，注册给谁，谁就可以使用
+         children: childrenP
+        }
+     })
+
+
+     //  第一步：创建student组件
+     const student = Vue.extend({
+      //   el: '#root', // 定义组件时，不能写el配置项目，因为最终所有的组件都要被一个vm管理，由vm决定服务于哪个容器
+        template:`
+          <div>
+             <h2>学生姓名：{{studentName}}</h2>
+             <h2>学生年龄：{{studentAge}}</h2>
+          </div>
+        `,
+        data(){
+         return {
+           studentName:'张三',
+           studentAge:19
+         }
+        }
+     })
+
+     // 组件创建标准写法
+   //   const hello = Vue.extend({
+   //      template:`
+   //        <div>
+   //           <h2>你好：{{name}}</h2>
+   //        </div>
+   //      `,
+   //      data(){
+   //       return {
+   //         name:'李四'
+   //       }
+   //      }
+   //   })
+
+
+     // 组件创建简写形式
+     const hello = {
+        template:`
+          <div>
+             <h2>你好：{{name}}</h2>
+          </div>
+        `,
+        data(){
+         return {
+           name:'李四'
+         }
+        }
+     }
+
+
+     Vue.component('hello',hello) // 注册全局组件，所有的Vue实例共享。第一个参数为实际组件名称
+
+     // 创建vm
+     new Vue({
+        el: '#root',
+        components:{ // 第二步：注册组件(局部注册，只有对应的这个Vue实例才能使用下面的组件)
+         // school:school, // key为实际的组件名称，value为创建组件时写的名称。key和value一样则可简写为一个
+         // student:student
+         school,
+         student
+        }
+     })
+
+     new Vue({
+      el:'#root2'
+     })
+   </script>
+
+
+
+    <!-- 第一章
+    
+    -->
+
+    <!-- 第二章 Vue组件化编程
+      1.概念
+        1.1模块
+           向外提供特定功能的js程序，一般就是一个js文件。作用是复用js、简化js编写、提高js运行效率
+        1.2组件
+           用来实现局部(特定)功能效果的代码和资源的集合(html/css/js/image等)。复用编码、简化编码、提高运行效率
+        1.3模块化
+           当应用中的js都以模块来编写，那这个应用就是一个模块化的应用
+        1.4组件化
+           当应用中的功能都是以多组件的方式来编写的，那这个应用就是一个组件化的应用
+           注意点
+             组件命名：一个单词时，首字母可大写School、可小写school
+                     多个单词时，可my-school、可MySchool(需要vue脚本手架支持，在html文件引入vue.js的方式不能使用该命名)
+             组件标签：第一种写法<school></school>     
+                     第二种写法<school/>，不使用脚手架时，该方式会导致后续组件不能渲染   
+        1.5非单文件组件
+           一个html文件中包含有多个组件。见本文件中"Vue.extend"相关例子
+        1.6单文件组件
+           一个文件中只包含有一个组件(一个文件就是一个组件)，如SingleFileComponent.vue文件就是一个组件，其中分为template、script、style三部分
+           往往需要一个根组件来整合分散在各个地方组件，如App.vue
+           还需要一个入口文件来关联根组件和容器，如main.js
+           还需要一个首页来挂载容器(呈现页面)，如index.html
+           以上做完了之后，还不能让index.html呈现出内容，这就需要用到脚手架了，否则浏览解析不了vue格式的文件
+           通过脚手架创建项目后，把上面说的这些文件替换脚手架中默认的文件，然后执行npm run serve(Vue2中的命令)就可以启动整个项目了
+        1.7VueComponent  
+           1.自定义的组件(如school)本质是一个名为VueComponent的构造函数，不是程序员定义的，是Vue.extend生成的
+           2.我们只需要写<school></school>，Vue解析时会帮我们创建school组件的实例对象。即Vue内部会执行new VueComponent(options)
+           3.每次调用Vue.extend，返回的都是一个全新的VueComponent
+           4.组件配置中的this指的是VueComponent实例对象  
+        1.8一个重要的内置关系
+           VueComponent.prototype.__proto__ === Vue.prototype
+           这么做就是让组件实例对象可以访问Vue原型上的属性、方法
+      2.脚手架
+        2.1概述
+           Vue脚手架是Vue官方提供的标准化开发工具(开发平台)
+           以前使用Vue CLI https://cli.vuejs.org/zh/   Vue CLI是官方提供的基于Webpack的Vue工具链(隐藏了所有webpack相关的配置)，它现在处于维护模式
+           现在官方推荐使用 create-vue 来创建基于 Vite 的新项目
+
+           当执行npm run dev(Vue3的命令)启动项目的时候，先找main.js文件
+      3.Vue2中node_modules/vue中的vue.js和vue.runtime.XXX.js区别
+        前者是完整版的Vue，包含核心功能+模板解析器
+        后者是运行版的Vue，只包含核心功能，没有模板解析器，所以不能使用template配置项，需要使用render函数接收到的某函数去指定具体内容   
+      4.ref属性   
+    -->
+  </body>
+</html>

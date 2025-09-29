@@ -1,7 +1,7 @@
 // import就是模块化相关的关键字，另外还有export
 import './assets/main.css'
 
-import { createApp } from 'vue'
+import { createApp } from 'vue' // 实际上引入的是node_modules/vue/package.json文件中module属性指定的文件“dist/vue.runtime.esm-bundler.js”
 import App from './App.vue'
 
 //安装element-plus后，就可以导入相关内容了
