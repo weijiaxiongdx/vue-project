@@ -268,7 +268,7 @@
     //1.props方式(使用频率最高)：父传子，父组件中使用子组件时直接写:paramKey=paramValue、子组件中使用defineProps(['paramKey'])接收
     //                        子传父，父组件中使用子组件时直接写:functionKey=functionName，子组件中使用defineProps(['functionKey'])接收并在需要的地方调用传过来的函数且传入数据
     //2.自定义事件方式：用于子传父，父组件中使用子组件时直接写@customeEvent=functionName，子组件中使用const emit = defineProps(['customeEvent'])接收并在需要的地方触发事件并传入参数emit(customeEvent,param)
-    //3.mitt方式：实现任意组件之间的通信(接收方绑定事件、提供方触发事件，类似发布订阅)。安装npm i mitt、创建emitter.ts文件、main.js中导入
+    //3.mitt方式：实现任意组件之间的通信(数据接收方绑定事件、数据提供方触发事件，类似发布订阅)。安装npm i mitt、创建emitter.ts文件、main.js中导入
     //4.v-model方式：
     //5.$attrs：实现当前组件的父组件向当前组件的子组件传递数据，祖传孙，也可以实现孙传祖(传函数到孙，孙触发函数)。$attrs是一个对象，包含所有父组件传入的标签属性(只包含没有使用defineProps接收的属性，接收过的在props对象中)
     //          在当前组件中的子组件上使用v-bind=“$attrs”来将父组件中的数据传递到孙组件中，孙组件中直接通过defineProps接收对应的数据，这就实现了祖传孙
@@ -276,6 +276,7 @@
     //  $parent用于子传父，值为对象，当前组件的父组件实例对象
     //7.provide，祖组件中通过provide('key',data)向后代(子、孙...)提供数据
     //  inject，后代组件中通过let data = inject('key',默认值)来注入祖组件提供的数据。这种方式不像$attrs那样需要中间组件来传递数据。也可以通过传递函数并回调的方式实现孙传祖
+    //8.消息发布与订阅：通过第三方库(如pubsub-js，npm i pubsub-js)来实现消息的发布、订阅，进而实现任意组件之间的通信
     import User from './User.vue'
     let parentData = ref('父组件的数据')
     function getChildData(value:string){//value为参数，:string明确参数为字符串类型

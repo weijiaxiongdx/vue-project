@@ -180,7 +180,33 @@
       3.Vue2中node_modules/vue中的vue.js和vue.runtime.XXX.js区别
         前者是完整版的Vue，包含核心功能+模板解析器
         后者是运行版的Vue，只包含核心功能，没有模板解析器，所以不能使用template配置项，需要使用render函数接收到的某函数去指定具体内容   
-      4.ref属性   
+      4.ref属性 
+      5.mixin混入  
+        将共性内容抽取到一个单独的xxx.js文件(可理解为混合)中
+        局部混合：需要使用共性内容的vue文件中通过import xxx、mixins['xxx']引入及配置混合，即可直接使用xxx.js中的属性、方法等，这属于局部混合
+        全局混合：在main.js中通过import xxx、Vue.minxin(xxx)引入及配置混合，所有地方都能使用xxx.js中的内容
+      6.插件
+        定义插件，如plugin.js。本质是一个包含install的对象，第一个参数是Vue，后面的参数是插件使用者传递的参数
+        main.js中引入及使用插件
+        脚手架环境才起作用
+      7.动画效果
+        <transition></transition>标签 + 样式
+      8.集成第三方动画库(如animate.css)
+        0.官网 https://animatecss.node.org.cn/
+        1.npm install animate.css 
+        2.import 'animate.css'
+        3.使用
+      9.vue-resource插件库(是对xhr对象的封装，用来发送请求)
+        npm i vue-resource
+
+        // main.js中引入插件并使用插件
+        import vueResource from 'vue-resource'
+        Vue.use(vueResource) // 这之后，VueComponent上多了一个$http对象，然后可以通过this.$http发送请求了，跟axios的用法一样。将发送请求中的axios替换成this.$http即可
+
+        实际工作用axios的多，Vue的作者也推荐使用axios
+      10.vuex
+         10.1概念
+             Vue中实现集中式状态(数据)管理的一个插件，对Vue应用中多个组件的共享状态进行集中式的管理(读/写)，也是组件间通信的方式，且适用于任意组件间的通信 
     -->
   </body>
 </html>

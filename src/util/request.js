@@ -6,7 +6,7 @@ import router from '@/router';
 //const baseURL = 'http://localhost:5000'; //后端服务地址
 
 //解决跨域问题前端方案：1.将baseURL的值改为api，实际请求时，会将当前ajax请求所在的源拼上去，所以浏览器实际请求地址为前端服务的地址http://localhost:5173/api
-//                  2.在vite.config.js文件中配置代理，将到“http://localhost:5173/api”的请求转到后端服务，相当于由前端服务请求后端服务(而不是浏览器直接请求后端服务)
+//                  2.在vite.config.js文件中配置代理服务器，将到“http://localhost:5173/api”的请求转到后端服务，相当于由前端中的代理服务器请求后端服务(而不是浏览器直接请求后端服务)
 //                  3.没有使用这里提供的实例发请求的都需要改造
 const baseURL = 'api';
 const instance = axios.create({baseURL});
