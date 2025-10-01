@@ -207,6 +207,20 @@
       10.vuex
          10.1概念
              Vue中实现集中式状态(数据)管理的一个插件，对Vue应用中多个组件的共享状态进行集中式的管理(读/写)，也是组件间通信的方式，且适用于任意组件间的通信 
+         10.2工作原理
+             Vue Components->Actions，是一个对象->Mutations，是一个对象->State，是一个对象->Vue Components  
+         10.3搭建Vuex环境(Vue2中使用Vuex3版本)
+             npm i vuex@3
+             import Vuex from 'vuex'
+             Vue.use(Vuex) // 这之后，new Vue({})中增加store配置项才会生效 
+             store相关 store/index.js
+             页面(如SingleFileComponent.vue)中使用store
+         10.3模块化 
+      11.vue-router 
+         11.1概念
+             vue的一个插件库，专门用来实现SPA应用
+             SPA：single page web applicaiton，整个应用只有一个完整的页面(如index.html)
+                  点击页面中的导航链接不会刷新页面，只会做页面的局部刷新，数据需要通过ajax请求获取  
     -->
   </body>
 </html>

@@ -3,11 +3,19 @@
 -->
 <template>
     <div>单文件组件测试</div>
+
+    <!--  使用store中的数据sum -->
+    <!-- <span>{{$store.state.sum}}</span>  -->
 </template>
 
 <script>
     export default {
-
+      methods:{
+        // add(){
+        //   this.$store.dispatch('add',2) // 有了Vuex环境，就可以使用this.$store.dispatch来调用store中actions中定义的函数了
+        //   this.$store.dispatch('ADD',2) //              也可以直接调用store中mutations中定义的函数          
+        // }
+      }
     }
 </script>
 
