@@ -221,6 +221,17 @@
              vue的一个插件库，专门用来实现SPA应用
              SPA：single page web applicaiton，整个应用只有一个完整的页面(如index.html)
                   点击页面中的导航链接不会刷新页面，只会做页面的局部刷新，数据需要通过ajax请求获取  
+         11.2使用(Vue2中使用3版本、Vue3使用4版本)
+             npm i vue-router@3
+             import VueRouter from 'vue-router'
+             Vue.use(VueRouter)
+             配置路由
+             呈现路由
+         11.3注意点 
+             路由组件通常放在pages文件夹、一般组件(通过标签使用的组件)通常放在components文件夹   
+             通过切换，“隐藏”了的路由组件默认是被销毁的，需要的时候再挂载
+             每个路由组件都有自己的$route属性，存储了自己的路由信息
+             整个应用只有一个router，可以通过$router属性获取到
     -->
   </body>
 </html>
