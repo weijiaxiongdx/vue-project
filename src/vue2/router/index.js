@@ -20,6 +20,9 @@ const router = new VueRouter({
                             id:$route.query.id,
                             title:$route.query.title
                         }
+                    },
+                    meta:{ // 配置路由元信息，供其它地方使用
+                        isAuth:true // 自定义属性，切换到该路由时需要权限校验
                     }
                 }
             ]
@@ -29,6 +32,26 @@ const router = new VueRouter({
             component:About
         }
     ]
+})
+
+// 全局前置路由守卫：在这里可以做路由切换时的权限判断，如满足一定的条件才进行路由切换。初始化时被调用、每一次路由切换之前被调用
+router.beforeEach((to,from,next)=>{ // 分别为目标路由、源路由
+    // if(to.path === '/x/y' || to.path === '/x/z'){ // 判断路由路径
+    if(to.name === 'Home' || to.name === 'Home2'){ // 判断路由组件名称 
+        if(localStorage.getItem('XXX') === 'YYY'){
+            next() // 放行
+        } else {
+            alert('无权限查看')
+        }
+    } else {
+        next() // 放行
+    }
+})
+
+
+// 全局后置路由守卫：初始化时被调用、每一次路由切换之后被调用
+router.afterEach((to,from)=>{
+    // 这里可以做的事：每次切换路由后，改变页签的title，页签的title信息可以事先放到路由元信息meta中
 })
 
 

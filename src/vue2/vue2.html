@@ -232,6 +232,27 @@
              通过切换，“隐藏”了的路由组件默认是被销毁的，需要的时候再挂载
              每个路由组件都有自己的$route属性，存储了自己的路由信息
              整个应用只有一个router，可以通过$router属性获取到
+         11.4编程式路由导航 
+             不借助<router-link>实现路由跳转，让路由跳转更加灵活
+             this.$router.push
+             this.$router.replace
+             this.$router.forward
+             this.$router.back
+             this.$router.go(3) // 正数表示前进几步、负数表示后退几步
+         11.5缓存路由组件
+             让不展示的路由组件保持挂载，不被销毁
+             <keep-alive></keep-alive>  
+
+             见“App.vue”
+         11.6路由组件独有的两个生命周期钩子
+             activated
+             deactivated
+
+             见“SingleFileComponent.vue”
+         11.7路由守卫
+             对路由进行权限控制
+             
+             见“router/index.js”
     -->
   </body>
 </html>

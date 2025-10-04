@@ -27,10 +27,16 @@
     }">
     主页
     </router-link>
-    <router-link to="/about">关于</router-link>
+    <router-link replace="true" to="/about">关于</router-link> <!-- 使用router-link会存存历史记录(浏览器中会有前进、后退)，默认为push模式(每个路由依次压栈，前进或后退通过指针控制。追加历史记录到栈顶)。可以设置为replace模式(替换栈顶当前记录) -->
 
     <!-- 切换到具体的组件时，组件的呈现位置 -->
-    <router-view></router-view> 
+    <keep-alive include="Home"> <!-- 缓存路由组件：改变路由后，之前的路由组件不会销毁而是被缓存起来。不配置任何属性，默认缓存所有路由组件。配置了include(写组件名字)则出现在include中的路由组件才会被缓存 -->
+        <router-view></router-view> 
+    </keep-alive> 
+    <keep-alive :include="['Home','x','Y']"> <!-- 级存多个 -->
+        <router-view></router-view> 
+    </keep-alive>
+   
 </template>
 
 <script>

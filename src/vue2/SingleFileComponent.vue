@@ -15,6 +15,14 @@
         //   this.$store.dispatch('add',2) // 有了Vuex环境，就可以使用this.$store.dispatch来调用store中actions中定义的函数了
         //   this.$store.dispatch('ADD',2) //              也可以直接调用store中mutations中定义的函数          
         // }
+      },
+
+      activated(){
+        console.log('路由组件独有钩子函数：路由组件被激活时触发')
+      },
+
+      deactivated(){
+        console.log('路由组件独有钩子函数：路由组件失活时触发')
       }
     }
 </script>
