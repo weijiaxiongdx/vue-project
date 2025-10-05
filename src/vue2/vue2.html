@@ -253,6 +253,31 @@
              对路由进行权限控制
              
              见“router/index.js”
+      12.Vue UI组件库 
+         12.1移动端UI组件库
+             Vant
+             Cube UI
+             Mint UI
+         12.2PC端UI组件库 
+             12.2.1Element UI
+                   npm i element-ui
+
+                   全局引入
+                      // 引入ElementUI组件库
+                      import ElementUI from 'element-ui'
+
+                      // 引入ElementUI全部样式
+                      import 'element-ui/lib/theme-chalk/index.css'
+
+                      // 使用插件库：把Element中所有的组件都注册了全局组件，体积大
+                      Vue.use(ElementUI)
+                   按需引入(借助babel-plugin-component，可以做到只引入需要的组件，以达到减小项目体积的目的)  
+                      npm install babel-plugin-component -D  
+                      修改babel.config.js配置文件，具体见官网
+                      import {Button,select} from 'element-ui'
+                      Vue.use(Button)
+                      Vue.use(select)
+             12.2.2IView UI    
     -->
   </body>
 </html>

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 // 创建一个路由器
 const router = new VueRouter({
+    mode:'history', // 路由模式不写则默认为hash模式
     routers:[
         {
             path:'home',
@@ -23,6 +24,10 @@ const router = new VueRouter({
                     },
                     meta:{ // 配置路由元信息，供其它地方使用
                         isAuth:true // 自定义属性，切换到该路由时需要权限校验
+                    },
+
+                    beforeEnter:(to,from,next)=>{ // 独享路由守卫：某个路由独享，只有前置没有后置
+                        // 权限判断
                     }
                 }
             ]

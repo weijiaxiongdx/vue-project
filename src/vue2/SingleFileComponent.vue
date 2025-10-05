@@ -23,6 +23,19 @@
 
       deactivated(){
         console.log('路由组件独有钩子函数：路由组件失活时触发')
+      },
+
+      // 组件内路由守卫：必须通过路由规则进入该组件时被调用 
+      beforeRouteEnter(to,from,next){
+        // 判断权限
+        next() // 放行
+
+      },
+
+      // 组件内路由守卫：必须通过路由规则离开该组件时被调用
+      beforeRouteLeave(to,from,next){
+        // 判断权限
+        next() // 放行
       }
     }
 </script>
