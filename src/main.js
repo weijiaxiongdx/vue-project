@@ -1,7 +1,7 @@
 // import就是模块化相关的关键字，另外还有export
 import './assets/main.css'
 
-import { createApp } from 'vue' // 实际上引入的是node_modules/vue/package.json文件中module属性指定的文件“dist/vue.runtime.esm-bundler.js”
+import { createApp } from 'vue' // 实际上引入的是node_modules/vue/package.json文件中module属性指定的文件“dist/vue.runtime.esm-bundler.js”。createApp为工厂函数
 import App from './App.vue'
 
 //安装element-plus后，就可以导入相关内容了
@@ -26,7 +26,7 @@ pinia.use(persist)
 //mitt工具
 import emitter from '@/utils/emmitter'
 
-//创建应用实例，应用实例的根组件为App
+//创建应用实例对象(相当于Vue2中的vm对象，但比vm更“轻”-没有那么多属性和方法)，应用实例的根组件为App
 const app = createApp(App)  // 使得App就是根组件
 
 //使用element-plus、locale
