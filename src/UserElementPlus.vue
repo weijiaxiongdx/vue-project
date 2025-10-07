@@ -4,6 +4,7 @@
     //Vue3中setup(){}中不能使用this
     //Vue3中setup(){}与Vue2中的data(){}、methods(){}等是平级的，可以同时存在，data(){}中可以使用this引用setup()中的数据，但反过来引用是不行的(旧语法可以引用新语法中的东西、新语法不可引用旧语法中的东西)
     //<script setup>语法糖是对setup(){}的简写
+    //Vue3中的setup(){}只在beforeCreate生命周期函数之前执行一次，且其中的this是undefined
 
     //ref：可定义基本类型的响应式数据和对象类型的响应式数据(底层还是通过reactive来处理的)。vue2中写在Data中的数据默认就是响应式的
     //     ref创建的变量必须使用".value"(模板代码中不需要加.vaue，但是js代码中必须加.value才能使用相关的数据)，reactive创建的变量不需要加.value就可以使用 
@@ -297,7 +298,40 @@
     //          子组件中写好<slot :paramKey="paramValue"></slot>，父组件中写<template v-slot="params">这里写hmtl内容，且可以通过params.paramKey获取参数</template>
     //          如果是带名子的插槽，<slot name="slotName" :paramKey="paramValue"></slot>，父组件中写<template v-slot:slotName="params">这里写hmtl内容，且可以通过params.paramKey获取参数</template>
 
-    //toRaw、markRaw
+
+    //shallowReactive
+    //浅响应式，只处理对象最外层(第一层)属性的响应式
+    //如果有一个对象数据，结构比较深，但变化的只是最外层的属性，可以使用shallowReactive
+
+
+    //shallowRef
+    //只处理基于数据类型的响应式，不进行对象的响应式处理
+    //如果有一个对象数据，后续功能不会修改对象中的属性，而是生成新的对象替换，可以使用shallowRef
+
+
+    //readonly
+    //让一个响应式数据变为(深)只读的
+
+
+    //shallowReadonly
+    //让一个响应式数据变为(浅)只读的。响应式数据的最外层(第一层)属性只读、深层属性可以修改
+
+
+    //toRaw
+    //将一个由reactive生成的响应式对象转为普通对象
+    //用于读取响应式对象对应的普通对象，对这个普通对象的所有操作不会引起页面刷新
+
+
+    //markRaw
+    //标记一个对象，使其永远不会再成为响应式对象
+    //有些值不应该被设置为响应式的，例如复杂的第三方类库等
+    //当渲染具有不可变数据源的大列表时，跳过响应式的转换可以提高性能
+
+
+    //customRef
+    //创建一个自定义的ref，对其依赖项跟踪和更新触发进行显示控制
+
+
     //Teleport
     //Suspense
 
