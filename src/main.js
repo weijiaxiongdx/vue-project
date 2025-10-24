@@ -35,6 +35,5 @@ app.use(ElementPlus,{locale})
 //使用路由器
 app.use(router)
 app.use(pinia)
-
 //控制html元素
 app.mount('#app') //挂载整个应用(根组件)到app容器中

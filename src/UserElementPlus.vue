@@ -201,7 +201,7 @@
     //let age = toRef(person,'age')
 
     //computed计算属性
-    //computed中的数据有变化时，会重新计算，计算一次后，结果会缓存，只要其中的数据没有变化就不会重新计算
+    //computed中的数据有变化时，会重新计算，计算一次后，结果会缓存，只要其中的数据没有变化就不会重新计算(即不会重新调用computed中的函数)
     //这种方式定义的计算属性fullName是只读的，不能修改
     // let fullName = computed(()=>{
     //     return 333+444

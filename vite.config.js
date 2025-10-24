@@ -31,12 +31,20 @@ export default defineConfig({
     }
   },
 
-    css: { // 解决VS Code控制台中告警而加的 告警信息：“The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.”
+  css: { // 解决VS Code控制台中告警而加的 告警信息：“The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.”
     preprocessorOptions: {
       // 如果'modern-compiler'不管用，可换成"modern"
       scss: {
         api: 'modern-compiler' // or "modern"
       }
     }
-  }  
+  },
+  
+  // optimizeDeps: {
+  //   exclude: [] // 配置在这里的依赖不会参与依赖预构建
+  // }
+
+  envDir: "", // 配置环境变量文件(.env等文件)所在目录，默认为项目根目录
+  envPrefix: "" // 配置环境变量名的前缀，默认为VITE
+
 })
