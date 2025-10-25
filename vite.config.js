@@ -44,7 +44,7 @@ export default defineConfig({
   //   exclude: [] // 配置在这里的依赖不会参与依赖预构建
   // }
 
-  envDir: "", // 配置环境变量文件(.env等文件)所在目录，默认为项目根目录
-  envPrefix: "" // 配置环境变量名的前缀，默认为VITE
+  // envDir: "", // 配置环境变量文件(.env等文件)所在目录，默认为项目根目录
+  // envPrefix: "" // 配置环境变量名的前缀，默认为VITE
 
 })

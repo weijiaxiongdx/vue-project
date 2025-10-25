@@ -9,7 +9,7 @@ import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-  <!-- Vue3模板中可以不写根标签(div) -->
+  <!-- Vue3模板中可以不写根标签(div)、也可以写多个根标签 -->
   <!-- <UserVue/> -->
   <!-- <br> -->
   <!-- <ButtonVue/> -->

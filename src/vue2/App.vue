@@ -4,7 +4,7 @@
 
 <template>
     <div>
-        <SingleFileComponent></SingleFileComponent> <!-- 第三步：使用组件 -->
+        <SingleFileComponent></SingleFileComponent> <!-- 第三步：使用组件。Vue2中只能有一个根标签 -->
     </div>
 
     <router-link to="/home">主页</router-link> <!-- 最终会被转成a标签，以实现路由的切换 -->
