@@ -37,3 +37,12 @@ app.use(router)
 app.use(pinia)
 //控制html元素
 app.mount('#app') //挂载整个应用(根组件)到app容器中
+
+
+// fetch("/api/users",{ // fetch为HTML5新特性。配置了viteMockServe插件后，这里会直接调用mock/index.js中的mock接口
+//     method: post
+// }).then(data => {
+//     console.log("data",data)
+// }).catch(error => {
+//     console.log("error",error)
+// })
